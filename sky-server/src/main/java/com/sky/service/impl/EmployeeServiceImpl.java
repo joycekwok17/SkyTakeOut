@@ -24,6 +24,7 @@ import org.springframework.util.DigestUtils;
 
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -50,16 +51,16 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new AccountNotFoundException(MessageConstant.ACCOUNT_NOT_FOUND);
         }
 
-        //密码比对
-        // 后期需要进行md5加密，然后再进行比对
+        // compare password with database password
+        // TODO 后期需要进行md5加密，然后再进行比对
         if (!DigestUtils.md5DigestAsHex(password.getBytes(StandardCharsets.UTF_8))
                 .equals(employee.getPassword())) {
-            //密码错误
+            //password is wrong
             throw new PasswordErrorException(MessageConstant.PASSWORD_ERROR);
         }
 
-        if (employee.getStatus() == StatusConstant.DISABLE) {
-            //账号被锁定
+        if (Objects.equals(employee.getStatus(), StatusConstant.DISABLE)) {
+            // account is locked
             throw new AccountLockedException(MessageConstant.ACCOUNT_LOCKED);
         }
 
