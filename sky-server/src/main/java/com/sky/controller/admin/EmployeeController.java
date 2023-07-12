@@ -50,8 +50,8 @@ public class EmployeeController {
 
         // login success, create token using jwt
         Map<String, Object> claims = new HashMap<>();
-        claims.put(JwtClaimsConstant.EMP_ID, employee.getId());
-        String token = JwtUtil.createJWT(
+        claims.put(JwtClaimsConstant.EMP_ID, employee.getId()); // put employee id into claims map to create token
+        String token = JwtUtil.createJWT( // create token using jwt library
                 jwtProperties.getAdminSecretKey(),
                 jwtProperties.getAdminTtl(),
                 claims);

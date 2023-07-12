@@ -71,6 +71,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void save(EmployeeDTO employeeDTO) {
+        System.out.println("current thread id: " + Thread.currentThread().getId());
         Employee employee = new Employee();
         BeanUtils.copyProperties(employeeDTO, employee); //属性拷贝 DTO-->DO
 
@@ -78,8 +79,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setPassword(DigestUtils.md5DigestAsHex(PasswordConstant.DEFAULT_PASSWORD.getBytes()));    //默认密码为123456
         employee.setCreateTime(LocalDateTime.now());    // 创建时间
         employee.setUpdateTime(LocalDateTime.now());        // 修改时间
-        employee.setCreateUser(BaseContext.getCurrentId());        //创建人
-        employee.setUpdateUser(BaseContext.getCurrentId());     // 修改人
+        employee.setCreateUser(BaseContext.getCurrentId());        //创建人为当前登录用户
+        employee.setUpdateUser(BaseContext.getCurrentId());     // 修改人  当前登录用户
         employeeMapper.insert(employee);
     }
 
