@@ -25,9 +25,9 @@ import java.util.Map;
  * 员工管理
  */
 @RestController
-@RequestMapping("/admin/employee")
+@RequestMapping("/admin/employee") // request url: /admin/employee + /xxx
 @Slf4j
-@Api(tags = "员工分类")
+@Api(tags = "Employee Related Interface")
 public class EmployeeController {
 
     @Autowired
@@ -42,8 +42,9 @@ public class EmployeeController {
      * @return
      */
     @PostMapping("/login")
+    @ApiOperation("Employee login interface")
     public Result<EmployeeLoginVO> login(@RequestBody EmployeeLoginDTO employeeLoginDTO) {
-        log.info("员工登录：{}", employeeLoginDTO);
+        log.info("Employee login：{}", employeeLoginDTO);
 
         Employee employee = employeeService.login(employeeLoginDTO);
 
@@ -71,20 +72,22 @@ public class EmployeeController {
      * @return
      */
     @PostMapping("/logout")
+    @ApiOperation("Employee logout interface")
     public Result<String> logout() {
         return Result.success();
     }
 
+
     /**
-     * 新增员工接口
+     * add new employee
      * @param employeeDTO
      * @return
      */
     @PostMapping
-    @ApiOperation("新增员工接口")
-    public Result save(@RequestBody EmployeeDTO employeeDTO){
+    @ApiOperation("Add New employee interface")
+    public Result<String> save(@RequestBody EmployeeDTO employeeDTO){ //request body is json format data
+        log.info("add new employee：{}",employeeDTO); // {} is a placeholder for the first parameter after the string
         employeeService.save(employeeDTO);
-        log.info("新增员工：{}",employeeDTO);
         return Result.success();
     }
 

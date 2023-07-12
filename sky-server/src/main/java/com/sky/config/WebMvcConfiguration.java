@@ -4,7 +4,6 @@ import com.sky.interceptor.JwtTokenAdminInterceptor;
 import com.sky.interceptor.JwtTokenUserInterceptor;
 import com.sky.json.JacksonObjectMapper;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.http.HttpMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -60,9 +59,9 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
     public Docket docket() {
         log.info("preparing to generate api document ...");
         ApiInfo apiInfo = new ApiInfoBuilder()
-                .title("苍穹外卖项目接口文档")
+                .title("Sky Takeaway Project API Document")
                 .version("2.0")
-                .description("苍穹外卖项目接口文档")
+                .description("Sky Takeaway Project API Document")
                 .build();
         Docket docket = new Docket(DocumentationType.SWAGGER_2) //swagger version
                 .apiInfo(apiInfo)
@@ -74,13 +73,14 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
     }
 
     /**
+     * 配置静态资源映射
      * configure the resource handler to serve static resources
      * such as images, js, and, css files
      * from specific locations under web application root, the classpath, and others.
      * @param registry
      */
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
-        log.info("start to configure static resources mapping ...");
+        log.info("start to configure static resources mapping ..."); //
         registry.addResourceHandler("/doc.html").addResourceLocations("classpath:/META-INF/resources/");
         registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
