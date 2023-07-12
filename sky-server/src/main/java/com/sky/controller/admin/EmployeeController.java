@@ -92,12 +92,12 @@ public class EmployeeController {
     }
 
     /**
-     * 分页查询
+     * page query employee list interface (pagination) (page query)
      * @param employeePageQueryDTO
      * @return
      */
     @GetMapping("/page")
-    @ApiOperation("员工分页查询")
+    @ApiOperation("Query employee by page interface")
     public Result<PageResult> page(EmployeePageQueryDTO employeePageQueryDTO){
         log.info("分页查询：{}",employeePageQueryDTO);
         PageResult pageResult = employeeService.page(employeePageQueryDTO);

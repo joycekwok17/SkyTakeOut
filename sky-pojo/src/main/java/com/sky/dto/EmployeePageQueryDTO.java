@@ -4,16 +4,19 @@ import lombok.Data;
 
 import java.io.Serializable;
 
+/**
+ * Employee page query DTO (Data Transfer Object)
+ */
 @Data
 public class EmployeePageQueryDTO implements Serializable {
 
-    //员工姓名
+    // employee name
     private String name;
 
-    //页码
+    // page number
     private int page;
 
-    //每页显示记录数
+    // page size
     private int pageSize;
 
 }
